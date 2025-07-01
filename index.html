@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Recipe Cards</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>Recipe Gallery</h1>
+    <select id="cuisineFilter">
+      <option value="all">All Cuisines</option>
+      <option value="italian">Italian</option>
+      <option value="mexican">Mexican</option>
+      <option value="indian">Indian</option>
+    </select>
+  </header>
+
+  <main class="recipe-grid">
+
+    <div class="recipe-card" data-cuisine="italian">
+      <img src="https://images.unsplash.com/photo-1603133872878-684f207e83df?auto=format&fit=crop&w=800&q=80" alt="Spaghetti Bolognese">
+      <div class="content">
+        <h2>Spaghetti Bolognese</h2>
+        <p>A classic Italian pasta dish with rich meat sauce.</p>
+        <button class="toggle-btn">Show Ingredients</button>
+        <ul class="ingredients hidden">
+          <li>Spaghetti</li>
+          <li>Ground beef</li>
+          <li>Tomato sauce</li>
+          <li>Onion, Garlic</li>
+        </ul>
+        <p class="instructions">Cook pasta. In a pan, sauté beef, onion, and garlic. Add sauce. Mix with pasta.</p>
+        <div class="rating">⭐⭐⭐⭐☆</div>
+      </div>
+    </div>
+
+    <div class="recipe-card" data-cuisine="mexican">
+      <img src="https://images.unsplash.com/photo-1612874742237-18697aa5b7da?auto=format&fit=crop&w=800&q=80" alt="Chicken Tacos">
+      <div class="content">
+        <h2>Chicken Tacos</h2>
+        <p>Flavorful grilled chicken in a soft taco shell.</p>
+        <button class="toggle-btn">Show Ingredients</button>
+        <ul class="ingredients hidden">
+          <li>Chicken breast</li>
+          <li>Taco shells</li>
+          <li>Lettuce, Tomato</li>
+          <li>Sour cream</li>
+        </ul>
+        <p class="instructions">Grill chicken. Assemble with toppings in shells.</p>
+        <div class="rating">⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+
+    <div class="recipe-card" data-cuisine="indian">
+      <img src="https://images.unsplash.com/photo-1608759265462-0c4b9109774b?auto=format&fit=crop&w=800&q=80" alt="Butter Chicken">
+      <div class="content">
+        <h2>Butter Chicken</h2>
+        <p>A rich and creamy North Indian curry dish.</p>
+        <button class="toggle-btn">Show Ingredients</button>
+        <ul class="ingredients hidden">
+          <li>Chicken</li>
+          <li>Tomato puree</li>
+          <li>Cream</li>
+          <li>Butter, Spices</li>
+        </ul>
+        <p class="instructions">Cook marinated chicken, add creamy tomato sauce, simmer well.</p>
+        <div class="rating">⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Ingredient Toggle
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const ingredients = button.nextElementSibling;
+        ingredients.classList.toggle('hidden');
+        button.textContent = ingredients.classList.contains('hidden') ? 'Show Ingredients' : 'Hide Ingredients';
+      });
+    });
+
+    // Cuisine Filter
+    const filter = document.getElementById('cuisineFilter');
+    filter.addEventListener('change', () => {
+      const selected = filter.value;
+      document.querySelectorAll('.recipe-card').forEach(card => {
+        card.style.display = (selected === 'all' || card.dataset.cuisine === selected) ? 'block' : 'none';
+      });
+    });
+  </script>
+
+</body>
+</html>
